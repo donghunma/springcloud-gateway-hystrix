@@ -1,4 +1,4 @@
-package com.javatechie.cloud.config;
+package com.rapidstar.cloud.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

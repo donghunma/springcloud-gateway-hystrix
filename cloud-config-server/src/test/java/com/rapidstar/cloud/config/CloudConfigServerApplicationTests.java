@@ -1,4 +1,4 @@
-package com.javatechie.cloud.config;
+package com.rapidstar.cloud.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
