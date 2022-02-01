@@ -4,14 +4,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: order-service
-          uri: lb://ORDER-SERVICE
+        - id: springboot-playground
+          uri: lb://SPRINGBOOT-PLAYGROUD
           predicates:
             - Path=/order/**
           filters:
             - name: CircuitBreaker
               args:
-                name: order-service
+                name: springboot-playground
                 fallbackuri: forward:/orderFallBack
         - id: payment-service
           uri: lb://PAYMENT-SERVICE

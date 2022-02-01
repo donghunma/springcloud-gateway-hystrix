@@ -4,22 +4,39 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: order-service
-          uri: lb://ORDER-SERVICE
+        - id: springboot-playground
+          uri: lb://SPRINGBOOT-PLAYGROUD
           predicates:
             - Path=/order/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: springboot-playground
+                fallbackuri: forward:/orderFallBack
         - id: payment-service
           uri: lb://PAYMENT-SERVICE
           predicates:
             - Path=/payment/**
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: payment-service
+                fallbackuri: forward:/paymentFallback
+                
 
 server:
   port: 8989
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000  
